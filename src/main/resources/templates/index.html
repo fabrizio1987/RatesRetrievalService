@@ -1,0 +1,88 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Rates Retrieval Assessment</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.ui/1.11.4/jquery-ui.min.css"
+          th:href="@{/webjars/jquery-ui/1.11.4/jquery-ui.min.css}"/>
+    <link rel="stylesheet" href="../static/css/style.css"
+          th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <img src="../static/images/entropay-logo.png"
+             th:src="@{/images/entropay-logo.png}" alt="Entropay Logo"/>
+
+        <h1>EntroPay Rates Retrieval Assessment</h1>
+    </div>
+    <div class="row" id="navbar">
+        <ul class="nav nav-pills">
+            <li role="presentation" class="active"><a th:href="@{/}">Home</a></li>
+            <li role="presentation"><a th:href="@{/rate/new}">Add Rate</a></li>
+            <li role="presentation"><a th:href="@{/rates}">Rate List</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="bs-example bs-example-bg-classes" data-example-id="contextual-backgrounds-helpers">
+            <h1>Follow the steps!</h1>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <h2><span class="label label-primary">Step 1 - Job Configuration</span></h2>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <p>Configure the file <code>ratesProcessJob.xml</code> inside the <code>META-INF/batch-jobs</code>.</p>
+                    Specifically, configure the following properties:
+                    <ul>
+                        <li>
+                            <code>&lt;name="scan_directory" value="ABSOLUTE_PATH_FOLDER"/&gt;</code> contains the folder
+                            path to scan.
+                        </li>
+                        <li>
+                            <code>&lt;property name="archive_directory" value="ABSOLUTE_PATH_FOLDER"&gt;</code> contains
+                            the folder path where
+                            to store the files after being processed.
+                        </li>
+                        <li>
+                            <code>&lt;property name="failed_directory" value="ABSOLUTE_PATH_FOLDER"/&gt;</code> contains
+                            the folder path
+                            where will be store the files with records that has been not possibile to process.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <h2><span class="label label-primary">Step 2 - Copy files into the directory</span></h2>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    Before starting the job, remember to copy the files to process into the folder you've set int the properties
+                     <code>scan_directory</code> of the <code>ratesProcessJob.xml</code> configuration file.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <button id="btnStartJob" class="btn btn-primary">Start Job</button>
+        <a id="btnRateList" class="btn btn-primary" th:href="@{/rates}">Show Rate List</a>
+    </div>
+    <div class="row">
+        <div id="message" class="alert alert-info" role="alert"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/jquery/2.2.3/jquery.min.js"
+        th:src="@{/webjars/jquery/2.2.3/jquery.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/jquery.ui/1.11.4/jquery-ui.min.js"
+        th:src="@{/webjars/jquery-ui/1.11.4/jquery-ui.min.js}"></script>
+<script src="../static/js/ajax.js"
+        th:src="@{/js/ajax.js}"></script>
+</body>
+</html>

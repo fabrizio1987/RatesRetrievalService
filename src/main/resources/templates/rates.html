@@ -1,0 +1,88 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Rates Retrieval Assessment</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.ui/1.11.4/jquery-ui.min.css"
+          th:href="@{/webjars/jquery-ui/1.11.4/jquery-ui.min.css}"/>
+    <link rel="stylesheet" href="../static/css/style.css"
+          th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <img src="../static/images/entropay-logo.png"
+             th:src="@{/images/entropay-logo.png}" alt="Entropay Logo"/>
+        <h1>EntroPay Rates Retrieval Assessment</h1>
+    </div>
+    <div class="row" id="navbar">
+        <ul class="nav nav-pills">
+            <li role="presentation"><a th:href="@{/}">Home</a></li>
+            <li role="presentation"><a th:href="@{/rate/new}">Add Rate</a></li>
+            <li role="presentation" class="active"><a th:href="@{/rates}">Rate List</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div th:if="${#lists.isEmpty(rates)}">
+            <div class="alert alert-danger" role="alert">
+                <strong>The list is empty!</strong>
+                Verify you've put the files in the correct folder before <a th:href="@{/job}">starting the job</a>.
+            </div>
+        </div>
+        <div th:if="${not #lists.isEmpty(rates)}">
+            <h2>Rate List</h2>
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>Id</th>
+                    <th>Filename</th>
+                    <th>Conversion Rate</th>
+                    <th>Buy Curr. Code</th>
+                    <th>Sell Curr. Code</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+                <tr th:each="rate : ${rates}">
+                    <td th:text="${rate.id}"></td>
+                    <td th:text="${rate.filename}"></td>
+                    <td th:text="${rate.conversionRate}"></td>
+                    <td th:text="${rate.buyCurrencyCode}"></td>
+                    <td th:text="${rate.sellCurrencyCode}"></td>
+                    <td align="center" th:text="${rate.validDate}"></td>
+                    <td>
+                        <a class="btn btn-info actionView" th:href="@{/rate/} + ${rate.id}">View</a>
+                        <a class="btn btn-warning actionEdit" th:href="@{/rate/edit/} + ${rate.id}">Edit</a>
+                        <a class="btn btn-danger actionDelete" th:href="@{/rate/delete/} + ${rate.id}">Delete</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <a class="btn btn-primary btn-lg" th:href="@{/rate/new}">New Rate</a>
+        <a id="actionDeleteAll" th:if="${not #lists.isEmpty(rates)}" class="btn btn-danger btn-lg" th:href="@{rate/delete/all}">Delete All</a>
+    </div>
+
+    <div id="dialog-confirm-delete-single" title="Remove Rate Item?">
+        <p>
+            <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+                The rate item selected will be deleted.Are you sure?
+        </p>
+    </div>
+    <div id="dialog-confirm-delete-all" title="Remove All Rate Items?">
+        <p>
+            <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+            All the rate items will be deleted.Are you sure?
+        </p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/jquery/2.2.3/jquery.min.js"
+        th:src="@{/webjars/jquery/2.2.3/jquery.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/jquery.ui/1.11.4/jquery-ui.min.js"
+        th:src="@{/webjars/jquery-ui/1.11.4/jquery-ui.min.js}"></script>
+<script src="../static/js/ajax.js"
+        th:src="@{/js/ajax.js}"></script>
+</body>
+</html>

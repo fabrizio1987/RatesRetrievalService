@@ -1,0 +1,24 @@
+<job id="ratesProcessJob" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
+    <properties>
+        <property name="scan_directory" value="C:\tmp\upload"/>
+        <property name="archive_directory" value="C:\tmp\archive"/>
+        <property name="failed_directory" value="C:\tmp\failed"/>
+    </properties>
+    <listeners>
+        <listener ref="RateProcessorJobListener"/>
+    </listeners>
+    <step id="filesProcess">
+        <listeners>
+            <listener ref="LineParseExceptionListener"/>
+        </listeners>
+        <chunk item-count="12">
+            <reader ref="RatesItemReader"/>
+            <processor ref="RatesItemProcessor"/>
+            <writer ref="RatesItemWriter"/>
+            <skippable-exception-classes>
+                <!--suppress BatchJobDomInspection -->
+                <include class="com.entropay.ratestetrieval.batch.RateLineParseException"/>
+            </skippable-exception-classes>
+        </chunk>
+    </step>
+</job>

@@ -1,0 +1,85 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Rates Retrieval Assessment</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.ui/1.11.4/jquery-ui.min.css"
+          th:href="@{/webjars/jquery-ui/1.11.4/jquery-ui.min.css}"/>
+    <link rel="stylesheet" href="../static/css/style.css"
+          th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <img src="../static/images/entropay-logo.png"
+             th:src="@{/images/entropay-logo.png}" alt="Entropay Logo"/>
+        <h1>EntroPay Rates Retrieval Assessment</h1>
+    </div>
+    <div class="row"  id="navbar">
+        <ul class="nav nav-pills">
+            <li role="presentation"><a th:href="@{/}">Home</a></li>
+            <li role="presentation" class="active"><a th:href="@{/rate/new}">Add Rate</a></li>
+            <li role="presentation"><a th:href="@{/rates}">Rate List</a></li>
+        </ul>
+    </div>
+
+        <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title"><span class="label label-danger">Attention!</span></h1>
+        </div>
+        <div class="panel-body">
+            <div class="alert alert-danger">
+            The validation business logic has not been implemented yet, so the stored rate entity could not meet the requirements
+                provided in the assessment specification.
+            </div>
+        </div>
+    </div>
+
+    <h2>Rate Detail</h2>
+    <form class="form-horizontal" th:object="${rate}" th:action="@{/rate}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Filename:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" th:field="*{filename}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Conversion Rate:</label>
+            <div class="col-sm-10">
+                <input type="number" step="any" min="0" class="form-control" th:field="*{conversionRate}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Buy Curr. Code:</label>
+            <div class="col-sm-1">
+                <input type="text" class="form-control buy-code" maxlength="3" th:field="*{buyCurrencyCode}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Sell Curr. Code:</label>
+            <div class="col-sm-1">
+                <input type="text" class="form-control sell-code" maxlength="3" th:field="*{sellCurrencyCode}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Date:</label>
+            <div class="col-sm-3">
+                <input type="date" class="form-control" th:field="*{validDate}"/>
+            </div>
+        </div>
+        <div class="row">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/jquery/2.2.3/jquery.min.js"
+        th:src="@{/webjars/jquery/2.2.3/jquery.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/jquery.ui/1.11.4/jquery-ui.min.js"
+        th:src="@{/webjars/jquery-ui/1.11.4/jquery-ui.min.js}"></script>
+<script src="../static/js/ajax.js"
+        th:src="@{/js/ajax.js}"></script>
+</body>
+</html>
